@@ -14,6 +14,6 @@ while(!rs.eof)
    total=total+ rs.fields(2);
    rs.movenext;
 }
-document.write("<tr><td>Total Amount</td><td>" + total + "</td></tr>");
+document.write("<tr><td><b>Total Amount</b></td><td><b>" + total + "</b></td></tr>");
 rs.close;
 connection.close;
