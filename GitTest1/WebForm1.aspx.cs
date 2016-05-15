@@ -19,23 +19,41 @@ namespace GitTest1
         {
             DB.ConnectionString = db_con;
             DB.Open();
-            Label1.Text = "Name has been amedned";
-        //    TableRow tnew = new TableRow();
+          //    TableRow tnew = new TableRow();
          //   table1.Rows.Add(tnew);
-            cmd = new SqlCommand("select top 3 [amount],[account] from [expense_data]",DB);
-            SqlDataReader rdr = cmd.ExecuteReader();
-                     
-            while (rdr.Read())
-            {
-                TableRow tnew = new TableRow();
-                table1.Rows.Add(tnew);
-                TableCell tcell = new TableCell();
-                tcell.Text = rdr[1].ToString();
-                tnew.Cells.Add(tcell);
-                TableCell tcell2 = new TableCell();
-                tcell2.Text = rdr[0].ToString();
-                tnew.Cells.Add(tcell2);
-            };
         }
-    }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Btn_gen_Click(object sender, EventArgs e)
+        {
+            if (Select_Drop.Text == "Summery")
+            {
+                cmd = new SqlCommand("select case when sum(amount) < 0 then SUM(amount)*(-1) when sum(amount) >= 0 then SUM(amount) end , category from [expense_data] group by category order by 1 desc ", DB);
+                SqlDataReader rdr = cmd.ExecuteReader();
+                
+                while (rdr.Read())
+                {
+                    TableRow tnew = new TableRow();
+                    table1.Rows.Add(tnew);
+                    TableCell tcell = new TableCell();
+                    tcell.Text = rdr[1].ToString();
+                    tnew.Cells.Add(tcell);
+                    TableCell tcell2 = new TableCell();
+                    tcell2.Text = rdr[0].ToString();
+                    tnew.Cells.Add(tcell2);
+                    
+                    
+                };
+            }
+            else if (Select_Drop.Text == "Detailed")
+            {
+
+            }
+        }
+        }
+       
 }
