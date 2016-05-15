@@ -8,7 +8,7 @@
 </head>
 <body onload="Page_Load">
     <form id="form1" runat="server">
-        <asp:table border="1" style="width:50%; text-align:center" runat="server" ID="table1">
+        <asp:table style="width:50%; text-align:center" runat="server" ID="table1" GridLines="Both">
                 <asp:TableRow runat="server">
                 <asp:TableCell runat="server">Name</asp:TableCell>
                 <asp:TableCell runat="server">amount</asp:TableCell>

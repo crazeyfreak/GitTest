@@ -4,3 +4,9 @@ c:\users\naresh d.naresh\documents\visual studio 2013\Projects\GitTest1\GitTest1
 c:\users\naresh d.naresh\documents\visual studio 2013\Projects\GitTest1\GitTest1\obj\Debug\GitTest1.dll
 c:\users\naresh d.naresh\documents\visual studio 2013\Projects\GitTest1\GitTest1\obj\Debug\GitTest1.pdb
 c:\users\naresh d.naresh\documents\visual studio 2013\Projects\GitTest1\GitTest1\obj\Debug\GitTest1.csprojResolveAssemblyReference.cache
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\bin\GitTest1.dll.config
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\bin\GitTest1.dll
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\bin\GitTest1.pdb
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\obj\Debug\GitTest1.csprojResolveAssemblyReference.cache
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\obj\Debug\GitTest1.dll
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\obj\Debug\GitTest1.pdb
