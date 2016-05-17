@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data.SqlClient;
+using System.Web.UI.WebControls; //For Datagrid
+using System.Data.SqlClient; //For SQL Connection
+using System.Data; //For DB
+
 
 namespace GitTest1
 {
@@ -46,7 +48,7 @@ namespace GitTest1
             else if (Select_Drop.Text == "Detail")
             {
                 table1.Width = Unit.Percentage(90);
-                
+            
                     {
                         TableCell tnew_cell = new TableCell();
                         tnew_cell.Text = "Category";
@@ -102,8 +104,45 @@ namespace GitTest1
 
 
                     };
-
+                    rdr.Close();
             }
+        }
+
+        protected void Btn_export_Click(object sender, EventArgs e)
+        {
+            cmd = new SqlCommand("select * from details_expense_data", DB);
+            SqlDataAdapter sda = new SqlDataAdapter();
+            sda.SelectCommand = cmd;
+
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            
+            //Assign data to datagrid
+            DataGrid dg = new DataGrid();
+            dg.DataSource = dt;
+            dg.DataBind();
+
+            //Excel File
+            string sfilename = "Test.xls";
+
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=" + sfilename);
+            Response.ContentType = "application/vnd.ms-excel";
+            EnableViewState = false;
+            
+            System.IO.StringWriter objSW = new System.IO.StringWriter();
+
+            HtmlTextWriter objHTW = new HtmlTextWriter(objSW);
+
+            dg.HeaderStyle.Font.Bold = true;
+            dg.RenderControl(objHTW);
+
+            Response.Write(objSW.ToString());
+
+            Response.End();
+            dg = null;
+
         }
     }
        
