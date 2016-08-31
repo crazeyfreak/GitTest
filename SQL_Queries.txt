@@ -1,0 +1,63 @@
+USE [test_db]
+GO
+
+/****** Object:  View [dbo].[account_info]    Script Date: 8/15/2016 7:29:43 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER view [dbo].[account_info] as
+select coalesce(total_amt,0) total_amount,acct.account_name from (select case when sum(amount)<0 then sum(amount)*(-1) else sum(amount) end total_amt,acct_id from expense_data group by acct_id) tot right join ref_account acct on tot.acct_id=acct.acct_id
+
+GO
+
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT  [id]
+      ,[acct_id]
+      ,[amount]
+      ,[category_id]
+      ,[subcategory]
+      ,[payment_id]
+      ,[description]
+      ,[expensed_date]
+      ,[modified_date]
+      ,[payee]
+      ,[ref_no]
+      ,[status]
+  FROM [test_db].[dbo].[expense_data]
+
+
+  begin tran
+ -- insert into expense_data(acct_id,amount,category_id,subcategory,payment_id,expensed_date,payee,status) values ((select acct_id from ref_account where account_name = 'Naresh Damji' ),2000,(select category_id from ref_category where category_text='Entertainment'),'Daddy',1,GETDATE(),'Not_Implemented','Cleared')
+
+
+  insert into expense_data(acct_id,amount,category_id,subcategory,payment_id,expensed_date,payee,status) values 
+  
+  
+  ((select acct_id from ref_account where account_name = 'Naresh Damji'),20000,(select category_id from ref_category where category_text='Automobile'),replace('Automobile','-',''),(select payment_id from ref_pay_method where description='Cash'),GETDATE(),'Not_Implemented','Cleared')
+    rollback
+
+  select REPLACE('----------Naresh','-','')
+
+
+
+  delete from expense_data where id=2405
+
+  
+  select * from ref_category
+
+  select * from tbl_exp_backup
+
+declare @ids1 int;
+
+set @ids1 = 3;
+commit
+
+select subcategory from ref_subcat where category_id=3
+
+update tbl_exp_backup set subcategory=(select subcategory from ref_subcat where category_id=@ids1) where category_id=@ids1
+
+select * from account_info
