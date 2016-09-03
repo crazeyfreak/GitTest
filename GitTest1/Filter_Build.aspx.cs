@@ -74,6 +74,7 @@ namespace GitTest1
         {
             DB.ConnectionString = all_constants.return_con();
             DB.Open();
+            //Added comment
         }
 
     }
