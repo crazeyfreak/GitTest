@@ -66,11 +66,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Filter_Build.aspx" />
     <Content Include="Insert_record.aspx" />
     <Content Include="Web.config" />
     <Content Include="Main_frm.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filter_Build.aspx.cs">
+      <DependentUpon>Filter_Build.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Filter_Build.aspx.designer.cs">
+      <DependentUpon>Filter_Build.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Insert_record.aspx.cs">
       <DependentUpon>Insert_record.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
