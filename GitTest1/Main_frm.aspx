@@ -50,8 +50,9 @@
                 
             </asp:DropDownList>
             <asp:Button ID="filter_apply" runat="server" Text="Apply" style="margin-left:20px; width:90px" OnClick="filter_apply_Click" />
+            <asp:Button ID="btn_filter_create" runat="server" Text="Create Filter" style="margin-left:20px; width:90px" OnClick="btn_filter_create_Click" />
         </asp:Panel>
-        <div align="center">
+        <div align="center" style="margin-top:10px;">
         <asp:table style="text-align:center" runat="server" ID="table1" GridLines="Both" Font-Names="Segoe UI" Font-Size="Small" Visible="false">
                 <asp:TableRow runat="server" ID="main_row">
                 <asp:TableCell runat="server"><b>Account</b></asp:TableCell>

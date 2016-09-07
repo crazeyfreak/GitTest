@@ -85,6 +85,15 @@ namespace GitTest1 {
         protected global::System.Web.UI.WebControls.Button filter_apply;
         
         /// <summary>
+        /// btn_filter_create control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_filter_create;
+        
+        /// <summary>
         /// table1 control.
         /// </summary>
         /// <remarks>

@@ -19,7 +19,11 @@ namespace GitTest1
         {
             DB.ConnectionString = all_constants.return_con();
             DB.Open();
-
+            if (!IsPostBack)
+            {
+                populate_acct_combo();
+                populate_other_combo();
+            }
         }
 
         private void populate_acct_combo()

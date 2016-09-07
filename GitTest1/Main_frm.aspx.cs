@@ -323,7 +323,8 @@ namespace GitTest1
 
                         {
                             TableCell tnew_cell = new TableCell();
-                            tnew_cell.Text = built_col.ToString().ToUpper();
+                            tnew_cell.Text = built_col.ToString().ToUpper().Replace('_',' ');
+                            tnew_cell.Font.Size = 9;
                             tnew_cell.Font.Bold = true;
                             main_row.Cells.Add(tnew_cell);
                         }
@@ -339,6 +340,11 @@ namespace GitTest1
                 
             
             return num;
+        }
+
+        protected void btn_filter_create_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Filter_build.aspx");
         }
     }
        

@@ -12,8 +12,9 @@
         
 
     </asp:Panel>
-        <asp:Button runat="server" ID="gen_txt" Text="Generate" OnClick="gen_txt_Click"/>
-
+        <asp:Button runat="server" ID="gen_txt" Text="And Condion" OnClick="gen_txt_Click"/>&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button runat="server" ID="btn_filter_create" Text="Create Filter" OnClick="btn_filter_create_Click" />&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:TextBox runat="server" ID="txt_filter_name"></asp:TextBox>
     </form>
 </body>
 </html>
