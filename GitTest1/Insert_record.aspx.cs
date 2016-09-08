@@ -264,7 +264,7 @@ namespace GitTest1
             //cmd = new SqlCommand("insert into expense_data(acct_id,amount,category_id,subcategory,payment_id,expensed_date,payee,status) values ((select acct_id from ref_account where account_name = '" +    +"')," + txt_amount.Text +
             //    ",(select category_id from ref_category where category_text='" + cat_list.Text + "'),replace('" + subcat_list.Text + "','-',''),(select payment_id from ref_pay_method where description='" + pay_list.Text + "'),GETDATE(),'Not_Implemented','Cleared')", DB);
 
-            cmd = new SqlCommand("exec Insert_Expense_data '" + acct_list.Text + "','" + txt_amount.Text + "','" + cat_list.Text + "','" + subcat_list.Text + "','" + pay_list.Text + "','" + payee_list.Text + "','1'," + txt_desc.Text + "", DB);
+            cmd = new SqlCommand("exec Insert_Expense_data '" + acct_list.Text + "','" + txt_amount.Text + "','" + cat_list.Text + "','" + subcat_list.Text + "','" + pay_list.Text + "','" + payee_list.Text + "','1','" + txt_desc.Text + "'", DB);
             cmd.ExecuteNonQuery();
             populate_acct_combo();
             populate_other_combo();

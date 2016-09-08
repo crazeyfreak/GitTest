@@ -16,7 +16,7 @@ namespace GitTest1
        
         SqlConnection DB = new SqlConnection();
         SqlCommand cmd;
-        string export_sql_command = "";
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,180 +31,147 @@ namespace GitTest1
             table1.Visible = true;
             if (Select_Drop.Text == "Summery")
             {
+                string columns = "\"account\",\"Total amount\"";
+                string query = "select format(total_amount,'##,##0.00'),account_name from account_info";
+                show_table(columns, query);
                 table1.Width = Unit.Percentage(50);
-                cmd = new SqlCommand("select format(total_amount,'##,##0.00'),account_name from account_info", DB);
-                SqlDataReader rdr = cmd.ExecuteReader();
+                //cmd = new SqlCommand("select format(total_amount,'##,##0.00'),account_name from account_info", DB);
+                //SqlDataReader rdr = cmd.ExecuteReader();
                 
-                while (rdr.Read())
-                {
-                    TableRow tnew = new TableRow();
-                    table1.Rows.Add(tnew);
-                    TableCell tcell = new TableCell();
-                    tcell.Text = rdr[1].ToString();
-                    tnew.Cells.Add(tcell);
-                    TableCell tcell2 = new TableCell();
-                    tcell2.Text = rdr[0].ToString();
-                    tnew.Cells.Add(tcell2);
+                //while (rdr.Read())
+                //{
+                //    TableRow tnew = new TableRow();
+                //    table1.Rows.Add(tnew);
+                //    TableCell tcell = new TableCell();
+                //    tcell.Text = rdr[1].ToString();
+                //    tnew.Cells.Add(tcell);
+                //    TableCell tcell2 = new TableCell();
+                //    tcell2.Text = rdr[0].ToString();
+                //    tnew.Cells.Add(tcell2);
                     
                     
-                };
+                //};
             }
             else if (Select_Drop.Text == "Detail")
             {
-                table1.Width = Unit.Percentage(90);
+                string columns = "\"account\",\"amount\",\"category\",\"sub-category\",\"payment_method\",\"description\",\"Date\",\"payee\",\"status\"";
+                string query = "select * from details_expense_data";
+                show_table(columns,query);
+                //table1.Width = Unit.Percentage(90);
             
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Category";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Sub-Category";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
+                //    {
+                //        TableCell tnew_cell = new TableCell();
+                //        tnew_cell.Text = "Category";
+                //        tnew_cell.Font.Bold = true;
+                //        main_row.Cells.Add(tnew_cell);
+                //    }
+                //    {
+                //        TableCell tnew_cell = new TableCell();
+                //        tnew_cell.Text = "Sub-Category";
+                //        tnew_cell.Font.Bold = true;
+                //        main_row.Cells.Add(tnew_cell);
+                //    }
 
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Payment Method";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Description";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Date";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Payee";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Status";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    cmd = new SqlCommand("select * from details_expense_data", DB);
-                    SqlDataReader rdr = cmd.ExecuteReader();
+                //    {
+                //        TableCell tnew_cell = new TableCell();
+                //        tnew_cell.Text = "Payment Method";
+                //        tnew_cell.Font.Bold = true;
+                //        main_row.Cells.Add(tnew_cell);
+                //    }
+                //    {
+                //        TableCell tnew_cell = new TableCell();
+                //        tnew_cell.Text = "Description";
+                //        tnew_cell.Font.Bold = true;
+                //        main_row.Cells.Add(tnew_cell);
+                //    }
+                //    {
+                //        TableCell tnew_cell = new TableCell();
+                //        tnew_cell.Text = "Date";
+                //        tnew_cell.Font.Bold = true;
+                //        main_row.Cells.Add(tnew_cell);
+                //    }
+                //    {
+                //        TableCell tnew_cell = new TableCell();
+                //        tnew_cell.Text = "Payee";
+                //        tnew_cell.Font.Bold = true;
+                //        main_row.Cells.Add(tnew_cell);
+                //    }
+                //    {
+                //        TableCell tnew_cell = new TableCell();
+                //        tnew_cell.Text = "Status";
+                //        tnew_cell.Font.Bold = true;
+                //        main_row.Cells.Add(tnew_cell);
+                //    }
+                //    cmd = new SqlCommand("select * from details_expense_data", DB);
+                //    SqlDataReader rdr = cmd.ExecuteReader();
 
-                    while (rdr.Read())
-                    {
-                        TableRow tnew = new TableRow();
-                        table1.Rows.Add(tnew);
-                        for (int i = 0; i <= 8; i++) { 
-                        TableCell tcell = new TableCell();
-                        tcell.Text = rdr[i].ToString();
-                        tnew.Cells.Add(tcell);
-                        }
-                        //TableCell tcell2 = new TableCell();
-                       // tcell2.Text = rdr[0].ToString();
-                       // tnew.Cells.Add(tcell2);
+                //    while (rdr.Read())
+                //    {
+                //        TableRow tnew = new TableRow();
+                //        table1.Rows.Add(tnew);
+                //        for (int i = 0; i <= 8; i++) { 
+                //        TableCell tcell = new TableCell();
+                //        tcell.Text = rdr[i].ToString();
+                //        tnew.Cells.Add(tcell);
+                //        }
+                //        //TableCell tcell2 = new TableCell();
+                //       // tcell2.Text = rdr[0].ToString();
+                //       // tnew.Cells.Add(tcell2);
 
 
-                    };
-                    rdr.Close();
+                //    };
+                //    rdr.Close();
             }
         }
 
 
-        private void show_table(String parameter)
+        private void show_table(string col_default,string sql_query)
         {
             table1.Visible = true;
             table1.Width = Unit.Percentage(90);
-            
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Category";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Sub-Category";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
+            int total_col = 0;
 
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Payment Method";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Description";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Date";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Payee";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    {
-                        TableCell tnew_cell = new TableCell();
-                        tnew_cell.Text = "Status";
-                        tnew_cell.Font.Bold = true;
-                        main_row.Cells.Add(tnew_cell);
-                    }
-                    cmd = new SqlCommand("select * from details_expense_data order by " + parameter, DB);
-                    SqlDataReader rdr = cmd.ExecuteReader();
+            total_col = (Create_table(col_default)/2);
 
-                    while (rdr.Read())
-                    {
-                        TableRow tnew = new TableRow();
-                        table1.Rows.Add(tnew);
-                        for (int i = 0; i <= 8; i++) { 
-                        TableCell tcell = new TableCell();
-                        tcell.Text = rdr[i].ToString();
-                        tnew.Cells.Add(tcell);
-                        }
-                        //TableCell tcell2 = new TableCell();
-                       // tcell2.Text = rdr[0].ToString();
-                       // tnew.Cells.Add(tcell2);
+            cmd = new SqlCommand(sql_query, DB);
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                TableRow tnew = new TableRow();
+                table1.Rows.Add(tnew);
+                for (int i = 0; i < total_col; i++) { 
+                TableCell tcell = new TableCell();
+                tcell.Text = rdr[i].ToString();
+                tnew.Cells.Add(tcell);
+                }
+                //TableCell tcell2 = new TableCell();
+                // tcell2.Text = rdr[0].ToString();
+                // tnew.Cells.Add(tcell2);
 
 
-                    };
-                    rdr.Close();
-            }
+            };
+            rdr.Close();
+        }
         
 
         protected void Btn_export_Click(object sender, EventArgs e)
         {
-          
+            string export_sql_command = string.Empty;
+ 
               if (Select_Drop.Text == "Summery") {
-                  export_sql_command = "select format(total_amount,'##,###.00'),account_name from account_info";
+                  export_sql_command = "select format(total_amount,'##,###.00') as Amount,account_name from account_info";
               }
               else if (Select_Drop.Text == "Detail")
               {
                   export_sql_command = "select * from details_expense_data";
               }
-              export_to_excel();
+              export_to_excel(export_sql_command);
         }
 
-        public void export_to_excel()
+        public void export_to_excel(string sql_cmd)
         {   
-            cmd = new SqlCommand(export_sql_command, DB);
+            cmd = new SqlCommand(sql_cmd, DB);
             SqlDataAdapter sda = new SqlDataAdapter();
             sda.SelectCommand = cmd;
 
@@ -248,7 +215,7 @@ namespace GitTest1
             {
                 drp_filter.Items.Clear();
                 pnl_filter.Visible = true;
-                cmd = new SqlCommand("select filter_name from filter_queries (nolock)", DB);
+                cmd = new SqlCommand("select filter_name from filter_queries (nolock) order by filter_id asc", DB);
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read()) {
                     drp_filter.Items.Add(new ListItem(rdr[0].ToString()));
@@ -271,7 +238,7 @@ namespace GitTest1
 
             cmd = new SqlCommand("build_filter_query '"+ drp_filter.Text +"'", DB);
             SqlDataReader rdr = cmd.ExecuteReader();
-            while (rdr.Read())
+            rdr.Read();
             {
                 columns = rdr[0].ToString();
                 where_clause = rdr[1].ToString();
@@ -296,11 +263,6 @@ namespace GitTest1
 
 
         }
-
-
-
-
-
 
 
         protected int Create_table(string cmd)
@@ -345,6 +307,16 @@ namespace GitTest1
         protected void btn_filter_create_Click(object sender, EventArgs e)
         {
             Response.Redirect("Filter_build.aspx");
+        }
+
+        protected void btn_export_filter_Click(object sender, EventArgs e)
+        {
+            cmd = new SqlCommand("build_filter_query '" + drp_filter.Text + "'", DB);
+            SqlDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
+            export_to_excel(rdr[1].ToString());
+            rdr.Close();
+            cmd.Dispose();
         }
     }
        

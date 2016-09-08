@@ -29,7 +29,7 @@
 <head runat="server">
     <title>My Testing</title>
 </head>
-<body onload="Page_Load">
+<body onload="Page_Load" style="background-color:lightgrey">
     <form id="form1" runat="server">
        <div class="main_div">
            <ul>
@@ -50,6 +50,7 @@
                 
             </asp:DropDownList>
             <asp:Button ID="filter_apply" runat="server" Text="Apply" style="margin-left:20px; width:90px" OnClick="filter_apply_Click" />
+            <asp:Button ID="btn_export_filter" runat="server" Text="Export Copy" style="margin-left:20px; width:90px" OnClick="btn_export_filter_Click" />
             <asp:Button ID="btn_filter_create" runat="server" Text="Create Filter" style="margin-left:20px; width:90px" OnClick="btn_filter_create_Click" />
         </asp:Panel>
         <div align="center" style="margin-top:10px;">

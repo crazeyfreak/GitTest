@@ -16,7 +16,10 @@ namespace GitTest1
         string built_query = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if(!IsPostBack)
+            {
+                Create_txt("ddl_method_" + 1, "txtbox_" + 1, "ddl_con_" + 1);
+            }
         }
 
         protected void Page_PreInit(object sender, EventArgs e)
@@ -109,16 +112,52 @@ namespace GitTest1
 
                         else if (drp_loop.Text == "Category")
                             built_query = built_query + " and category ";
+
+                        else if (drp_loop.Text == "Sub-Category")
+                            built_query = built_query + " and subcategory ";
+
+                        else if (drp_loop.Text == "Payment Method")
+                            built_query = built_query + " and payment_method ";
+
+                        else if (drp_loop.Text == "Payee")
+                            built_query = built_query + " and payee ";
+
+                        else if (drp_loop.Text == "Status")
+                            built_query = built_query + " and Status ";
                     }
+
 
                     if (drp_loop.ID.Contains("ddl_con_"))
                     {
                         if (drp_loop.Text == "Like")
+                        {
                             built_query = built_query + "like ";
+                            if (total_condition % 2 == 0)
+                                built_query = built_query + "''%" + ((TextBox)Page.Form.FindControl("txtbox_" + (total_condition / 2))).Text + "%''";
+                        }
+                        if (drp_loop.Text == "Equals")
+                        {
+                            built_query = built_query + "= ";
+                            if (total_condition % 2 == 0)
+                                built_query = built_query + "''" + ((TextBox)Page.Form.FindControl("txtbox_" + (total_condition / 2))).Text + "''";
+                        }
+                        if (drp_loop.Text == "Starts With")
+                        {
+                            built_query = built_query + "like ";
+                            if (total_condition % 2 == 0)
+                                built_query = built_query + "''" + ((TextBox)Page.Form.FindControl("txtbox_" + (total_condition / 2))).Text + "%''";
+                        }
+                        if (drp_loop.Text == "End With")
+                        {
+                            built_query = built_query + "like ";
+                            if (total_condition % 2 == 0)
+                                built_query = built_query + "''%" + ((TextBox)Page.Form.FindControl("txtbox_" + (total_condition / 2))).Text + "''";
+                        }
+                            
                     }
 
-                    if (total_condition % 2 == 0)
-                        built_query = built_query + "''%" + ((TextBox)Page.Form.FindControl("txtbox_" + (total_condition / 2))).Text + "%''";
+                    //if (total_condition % 2 == 0)
+                    //    built_query = built_query + "''%" + ((TextBox)Page.Form.FindControl("txtbox_" + (total_condition / 2))).Text + "%''";
                     //ViewState["Query"] =  built_query;
                     total_condition++;
                //     btn_filter_create.Text = built_query;
@@ -129,9 +168,15 @@ namespace GitTest1
                     
                 }
                 string col_default = "\"account\",\"amount\",\"category\",\"subcategory\",\"payment_method\",\"description\",\"expensed_date\",\"payee\",\"status\"";
-                cmd = new SqlCommand("exec insert_filter '" + txt_filter_name.Text + "','" + col_default + "',' from details_expense_data where 1=1 "+  built_query +" '", DB);
+                cmd = new SqlCommand("exec insert_filter '" + txt_filter_name.Text + "','" + col_default + "','"+  built_query +" '", DB);
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
+                txt_filter_name.Text = string.Empty;
+                Response.Redirect("Filter_build.aspx");
+            }
+            else
+            {
+                lbl_empty.Visible = true;
             }
 
         }
