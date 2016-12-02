@@ -29,7 +29,7 @@
         <asp:UpdatePanel ID="panel1" runat="server"><ContentTemplate>
     <div>
     <asp:Label ID="lbl1" runat="server" Text="Account" CssClass="text-info"></asp:Label> 
-        <asp:DropDownList runat="server" id="acct_list" Width="20%" CssClass="margins" onchange="Displaytext(this)">
+        <asp:DropDownList runat="server" id="acct_list" Width="20%" CssClass="margins" >
             <asp:ListItem></asp:ListItem>
         </asp:DropDownList>
 
@@ -39,6 +39,12 @@
         <asp:panel runat="server" style="display:inline;" DefaultButton="btn_add_acct" ><asp:TextBox runat="server" ID="txt_add_acct" CssClass="margins" Visible="False" Width="10%"></asp:TextBox><asp:Button runat="server" id="btn_add_acct" CssClass="margins btn btn-sm" Text="Add Account" Visible="False" OnClick="btn_add_acct_Click"/></asp:panel>
         <br /><br />
         
+        <asp:Button id="btn_auto_fill" runat="server" Text="Auto Fill" OnClick="btn_auto_fill_Click" />
+        <asp:DropDownList runat="server" ID="drp_auto_fill" CssClass="margins" Width="10%" AutoPostBack="True" OnSelectedIndexChanged="drp_auto_fill_SelectedIndexChanged">
+            <asp:ListItem Value="" Text="" Enabled="false"></asp:ListItem>
+        </asp:DropDownList>
+        <br /><br />
+
         <asp:Label runat="server" Text="Amounts"></asp:Label>
         <asp:TextBox ID="txt_amount" runat="server" CssClass="margins" Width="20%" TextMode="Number" step="0.01"></asp:TextBox>
         <br /><br />

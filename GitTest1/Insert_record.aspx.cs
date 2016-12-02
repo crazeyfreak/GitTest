@@ -273,9 +273,43 @@ namespace GitTest1
             txt_desc.Text = null;
         }
 
+        protected void btn_auto_fill_Click(object sender, EventArgs e)
+        {
+            drp_auto_fill.Items.Clear();
+            drp_auto_fill.Items.Add(new ListItem("","",false));
+            cmd = new SqlCommand("select fill_name from tbl_auto_fill_info", DB);
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read()){
+                drp_auto_fill.Items.Add(new ListItem(rdr[0].ToString()));
+            }
+            rdr.Close();
+            cmd.Dispose();
+        }
 
-
-     
-
+        protected void drp_auto_fill_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmd = new SqlCommand("exec gen_fill_info '" + drp_auto_fill.Text.ToString() + "'", DB);
+            SqlDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
+            txt_amount.Text = rdr[2].ToString();
+            cat_list.Text = rdr[3].ToString();
+            {
+                subcat_list.Items.Clear();
+                cmd = new SqlCommand("select subcategory from ref_subcat where category_id in (select category_id from ref_category where category_text like '%" + cat_list.Text.ToString() + "%')", DB);
+                SqlDataReader rdr1 = cmd.ExecuteReader();
+                while (rdr1.Read())
+                {
+                    subcat_list.Items.Add(new ListItem(rdr1[0].ToString()));
+                }
+                rdr1.Close();
+                cmd.Dispose();
+            }
+            //cat_list.SelectedIndex = drop_cat_selection.Items.IndexOf(drop_cat_selection.Items.FindByText(rdr[3].ToString()));
+            subcat_list.Text = rdr[4].ToString();
+            pay_list.Text = rdr[5].ToString();
+            payee_list.Text = rdr[6].ToString();
+            txt_desc.Text = rdr[7].ToString();
+            rdr.Close();
+        }
     }
 }

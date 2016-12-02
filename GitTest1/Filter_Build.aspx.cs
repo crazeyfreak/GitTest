@@ -75,6 +75,7 @@ namespace GitTest1
             drp2.Items.Add(new ListItem("Equals"));
             drp2.Items.Add(new ListItem("Starts With"));
             drp2.Items.Add(new ListItem("End With"));
+            drp2.Items.Add(new ListItem("Delete"));
             pnl_textbox.Controls.Add(drp2);
             
             Literal lit = new Literal();
@@ -122,7 +123,7 @@ namespace GitTest1
                         else if (drp_loop.Text == "Payee")
                             built_query = built_query + " and payee ";
 
-                        else if (drp_loop.Text == "Status")
+                        else if (drp_loop.Text == "Status") 
                             built_query = built_query + " and Status ";
                     }
 
@@ -152,6 +153,11 @@ namespace GitTest1
                             built_query = built_query + "like ";
                             if (total_condition % 2 == 0)
                                 built_query = built_query + "''%" + ((TextBox)Page.Form.FindControl("txtbox_" + (total_condition / 2))).Text + "''";
+                        }
+                        if (drp_loop.Text == "Delete") 
+                        {
+                            built_query = built_query + "like ''%%''";
+                            //No need to add the condition
                         }
                             
                     }

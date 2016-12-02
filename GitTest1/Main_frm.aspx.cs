@@ -32,7 +32,8 @@ namespace GitTest1
             if (Select_Drop.Text == "Summery")
             {
                 string columns = "\"account\",\"Total amount\"";
-                string query = "select format(total_amount,'##,##0.00'),account_name from account_info";
+                //string query = "select format(total_amount,'##,##0.00'),account_name from account_info";
+                string query = "select account,Total_amount from account_info;";
                 show_table(columns, query);
                 table1.Width = Unit.Percentage(50);
                 //cmd = new SqlCommand("select format(total_amount,'##,##0.00'),account_name from account_info", DB);
@@ -160,7 +161,7 @@ namespace GitTest1
             string export_sql_command = string.Empty;
  
               if (Select_Drop.Text == "Summery") {
-                  export_sql_command = "select format(total_amount,'##,###.00') as Amount,account_name from account_info";
+                  export_sql_command = "select total_amount as Amount,account from account_info";
               }
               else if (Select_Drop.Text == "Detail")
               {
@@ -213,16 +214,22 @@ namespace GitTest1
             }
             else
             {
-                drp_filter.Items.Clear();
-                pnl_filter.Visible = true;
-                cmd = new SqlCommand("select filter_name from filter_queries (nolock) order by filter_id asc", DB);
-                SqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read()) {
-                    drp_filter.Items.Add(new ListItem(rdr[0].ToString()));
-                }
-                cmd.Dispose();
-                rdr.Close();
+                refresh_filter_combo();
             }
+        }
+
+        private void refresh_filter_combo()
+        {
+            drp_filter.Items.Clear();
+            pnl_filter.Visible = true;
+            cmd = new SqlCommand("select filter_name from filter_queries (nolock) order by filter_id asc", DB);
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                drp_filter.Items.Add(new ListItem(rdr[0].ToString()));
+            }
+            cmd.Dispose();
+            rdr.Close();
         }
 
         protected void Unnamed1_Click(object sender, EventArgs e)
@@ -232,20 +239,25 @@ namespace GitTest1
 
         protected void filter_apply_Click(object sender, EventArgs e)
         {
-           // show_table("subcategory");
+            // show_table("subcategory");
             string columns = string.Empty;
             string where_clause = string.Empty;
-
-            cmd = new SqlCommand("build_filter_query '"+ drp_filter.Text +"'", DB);
+            string where_for_sum = string.Empty;
+            cmd = new SqlCommand("build_filter_query '" + drp_filter.Text + "'", DB);
             SqlDataReader rdr = cmd.ExecuteReader();
             rdr.Read();
             {
                 columns = rdr[0].ToString();
                 where_clause = rdr[1].ToString();
+                where_for_sum = "select Format(sum(-1*without_fmt),'##,###.00')  " + rdr[2].ToString();
             }
+
+            // create_table is used to create the table main title columns
             int count = (Create_table(columns) / 2);
             rdr.Close();
 
+
+            // to insert the record in the table.
             cmd = new SqlCommand(where_clause, DB);
             rdr = cmd.ExecuteReader();
             while (rdr.Read())
@@ -261,6 +273,36 @@ namespace GitTest1
             }
             rdr.Close();
 
+            //For adding the total Cell at the End of report.
+            TableRow t_total = new TableRow();
+            table1.Rows.Add(t_total);
+            {
+                TableCell t_cell = new TableCell();
+                t_cell.Text = "Total";
+                t_cell.Font.Size = 10;
+                t_cell.Font.Bold = true;        
+                t_total.Cells.Add(t_cell);
+            }
+            
+            {
+                try
+                {
+                    cmd = new SqlCommand(where_for_sum, DB);
+                    rdr = cmd.ExecuteReader();
+                    rdr.Read();
+                    TableCell t_cell = new TableCell();
+                    t_cell.Text = rdr[0].ToString();
+                    t_cell.Font.Size = 10;
+                    t_cell.Font.Bold = true;
+                    t_total.Cells.Add(t_cell);
+                    rdr.Close();
+                }
+                catch (Exception)
+                {
+
+                }
+                
+            }
 
         }
 
@@ -269,8 +311,8 @@ namespace GitTest1
         {
             int num = 0;
             string built_col = string.Empty;
-            main_row.Cells.RemoveAt(0);
-            main_row.Cells.RemoveAt(0);
+          //  main_row.Cells.RemoveAt(0);
+         //   main_row.Cells.RemoveAt(0);
             for (int i = 0; i < cmd.Length; i++)
             {
                 if (cmd[i] == '\"')
@@ -278,7 +320,7 @@ namespace GitTest1
                     num++;
                     if (num % 2 == 0)
                     {
-                        
+                        // To insert the new cell in table
                         //main_row.Cells.RemoveAt(1);
                         table1.Visible = true;
                         table1.Width = Unit.Percentage(90);
@@ -295,7 +337,8 @@ namespace GitTest1
                 }
                 else
                 {
-                    if (cmd[i] != ',') {
+                    // to olny include title after double quotes
+                    if (cmd[i] != ',' && num%2 !=0) {
                     built_col = built_col + cmd[i].ToString(); }
                 }
             }
@@ -317,6 +360,53 @@ namespace GitTest1
             export_to_excel(rdr[1].ToString());
             rdr.Close();
             cmd.Dispose();
+        }
+
+        protected void btn_filter_view_Click(object sender, EventArgs e)
+        {
+            cmd = new SqlCommand("select filter_name,where_clause,column_selected from filter_queries where filter_name='" + drp_filter.Text + "'",DB);
+            SqlDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
+            lbl_filter_name.Text = rdr[0].ToString();
+            txt_filter_view.Text = rdr[1].ToString();
+            txt_filter_col.Text = rdr[2].ToString();
+            pnl_filter_view.Visible = true;
+            rdr.Close();
+            
+        }
+        
+        protected void btn_filter_save_Click(object sender, EventArgs e)
+        {
+            string sql_cmd_where = txt_filter_view.Text;
+            sql_cmd_where = sql_cmd_where.Replace("'", "''");
+
+            string sql_cmd_col = txt_filter_col.Text;
+            sql_cmd_col = sql_cmd_col.Replace('"', '\"');
+
+            sql_cmd_where = "UPDATE filter_queries set where_clause='" + sql_cmd_where + "', column_selected ='"+ sql_cmd_col +"' where filter_name='" + lbl_filter_name.Text + "'";
+            
+            cmd = new SqlCommand(sql_cmd_where, DB);
+            cmd.ExecuteNonQuery();
+            txt_filter_view.Text = string.Empty;
+            txt_filter_col.Text = string.Empty;
+            pnl_filter_view.Visible = false;
+        }
+
+        protected void btl_filter_cancel_Click(object sender, EventArgs e)
+        {
+            txt_filter_view.Text = string.Empty;
+            txt_filter_col.Text = string.Empty;
+            pnl_filter_view.Visible = false;
+        }
+
+        protected void btn_filter_delete_Click(object sender, EventArgs e)
+        {
+            cmd = new SqlCommand("DELETE from Filter_queries where filter_name = '"+ lbl_filter_name.Text +"'",DB);
+            cmd.ExecuteNonQuery();
+            refresh_filter_combo();
+            txt_filter_view.Text = string.Empty;
+            txt_filter_col.Text = string.Empty;
+            pnl_filter_view.Visible = false;
         }
     }
        

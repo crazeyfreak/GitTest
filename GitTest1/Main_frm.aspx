@@ -19,6 +19,15 @@
     .filter_pnl {
         margin-top:10px;
     }
+    .table_align{
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:10px;
+    }
+
+    .btn_filter_margin {
+        margin-left:20px;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -52,15 +61,27 @@
             <asp:Button ID="filter_apply" runat="server" Text="Apply" style="margin-left:20px; width:90px" OnClick="filter_apply_Click" />
             <asp:Button ID="btn_export_filter" runat="server" Text="Export Copy" style="margin-left:20px; width:90px" OnClick="btn_export_filter_Click" />
             <asp:Button ID="btn_filter_create" runat="server" Text="Create Filter" style="margin-left:20px; width:90px" OnClick="btn_filter_create_Click" />
+            <asp:Button ID="btn_filter_view" runat="server" Text="View Filter" style="margin-left:20px; width:90px" OnClick="btn_filter_view_Click"/>
         </asp:Panel>
-        <div align="center" style="margin-top:10px;">
+        <div align="center" class="table_align">
         <asp:table style="text-align:center" runat="server" ID="table1" GridLines="Both" Font-Names="Segoe UI" Font-Size="Small" Visible="false">
                 <asp:TableRow runat="server" ID="main_row">
-                <asp:TableCell runat="server"><b>Account</b></asp:TableCell>
-                <asp:TableCell runat="server"><b>Total Amount</b></asp:TableCell>
+               
             </asp:TableRow>
         </asp:table>
-      </div>  
+      </div>
+        <asp:Panel runat="server" ID="pnl_filter_view" Visible="false" BorderColor="Black" BorderWidth="2" HorizontalAlign="Center">
+            <asp:Label runat="server" ID="lbl_filter_name" Text="Fil_Name"></asp:Label>
+            <br />
+            <asp:TextBox runat="server" ID="txt_filter_view" Height="100px" Width="300px" TextMode="MultiLine"></asp:TextBox>
+            <br />
+            <asp:TextBox ID="txt_filter_col" runat="server" Width="300px"></asp:TextBox> <asp:label runat="server" Text="?" ToolTip="Limited Columns only else it'll throw error" ></asp:label>
+            <br />
+            <asp:Button runat="server" ID="btn_filter_save" Text="Save" CssClass="btn_filter_margin" OnClick="btn_filter_save_Click"/>
+            <asp:Button runat="server" ID="btn_filter_delete" Text="Delete" CssClass="btn_filter_margin" OnClick="btn_filter_delete_Click"/>
+            <asp:Button runat="server" ID="btl_filter_cancel" Text="Cancel" CssClass="btn_filter_margin" OnClick="btl_filter_cancel_Click"/>
+
+        </asp:Panel>
     </form>
 </body>
 </html>

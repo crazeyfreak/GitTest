@@ -31,24 +31,6 @@ namespace GitTest1 {
         protected global::System.Web.UI.WebControls.Panel pnl_textbox;
         
         /// <summary>
-        /// txt_filter_name control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_filter_name;
-        
-        /// <summary>
-        /// lbl_empty control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_empty;
-        
-        /// <summary>
         /// gen_txt control.
         /// </summary>
         /// <remarks>
@@ -58,6 +40,15 @@ namespace GitTest1 {
         protected global::System.Web.UI.WebControls.Button gen_txt;
         
         /// <summary>
+        /// txt_filter_name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_filter_name;
+        
+        /// <summary>
         /// btn_filter_create control.
         /// </summary>
         /// <remarks>
@@ -65,5 +56,14 @@ namespace GitTest1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_filter_create;
+        
+        /// <summary>
+        /// lbl_empty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_empty;
     }
 }

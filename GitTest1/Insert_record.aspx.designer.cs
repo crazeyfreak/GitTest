@@ -85,6 +85,24 @@ namespace GitTest1 {
         protected global::System.Web.UI.WebControls.Button btn_add_acct;
         
         /// <summary>
+        /// btn_auto_fill control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_auto_fill;
+        
+        /// <summary>
+        /// drp_auto_fill control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drp_auto_fill;
+        
+        /// <summary>
         /// txt_amount control.
         /// </summary>
         /// <remarks>
