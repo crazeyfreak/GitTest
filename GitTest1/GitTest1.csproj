@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,6 +69,7 @@
   <ItemGroup>
     <Content Include="Filter_Build.aspx" />
     <Content Include="Insert_record.aspx" />
+    <Content Include="jquery.min.js" />
     <Content Include="Web.config" />
     <Content Include="Main_frm.aspx" />
   </ItemGroup>

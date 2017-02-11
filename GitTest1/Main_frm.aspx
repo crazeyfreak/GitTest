@@ -1,5 +1,30 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Main_frm.aspx.cs" Inherits="GitTest1.WebForm1" %>
 <style>
+    .button {
+        border-radius:4px;
+        background-color:#f4511e;
+        border:none;
+        color:#ffffff;
+        text-align:center;
+        font-size:10px;
+        padding:8px;
+        transition : all 0.5s;
+        cursor : pointer;
+        margin:3px;
+        width:100px; 
+        box-shadow: 2px 2px 1px black;
+    }
+
+    @keyframes test1 {
+        from {background-color:red}
+        to {background-color:yellow}
+    }
+
+    .button:hover {
+        background-color:black;
+        font:bold;
+    }
+
     ul {
       list-style-type:none;
       margin:0;
@@ -36,7 +61,20 @@
 
 
 <head runat="server">
-    <title>My Testing</title>
+    <title>Expense Tracker</title>
+    <script src="jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#Btn_gen").hover(function () {
+                $(this).append('>>');
+            });
+
+            $("#Btn_gen").mouseleave(function () {
+                $(this).text($(this).text().replace(">>", ""));
+            });
+        });
+    </script>
 </head>
 <body onload="Page_Load" style="background-color:lightgrey">
     <form id="form1" runat="server">
@@ -50,25 +88,28 @@
             <asp:ListItem>Summery</asp:ListItem>
             <asp:ListItem>Detail</asp:ListItem>
             </asp:DropDownList>
-            <asp:Button ID="Btn_gen" runat="server" Text="Generate" style="margin-left:20px; width:90px" OnClick="Btn_gen_Click"  />
-            <asp:Button ID="btn_export" runat="server" Text="Export" style="margin-left:20px; width:90px" OnClick="Btn_export_Click"  />
-           <asp:Button ID="btn_filter" runat="server" Text="Filter" style="margin-left:20px; width:90px" OnClick="Btn_filter_Click"  />
+            <asp:Button ID="Btn_gen" runat="server"  Text="Generate" OnClick="Btn_gen_Click" CssClass="button" />
+            <asp:Button ID="btn_export" runat="server" Text="Export" OnClick="Btn_export_Click"  CssClass="button" />
+           <asp:Button ID="btn_filter" runat="server" Text="Filter" OnClick="Btn_filter_Click"  CssClass="button"/>
         </div> 
         <asp:Panel runat="server" ID="pnl_filter" CssClass="filter_pnl" Visible="false">
             <asp:DropDownList runat="server" ID="drp_filter" >
                 
             </asp:DropDownList>
-            <asp:Button ID="filter_apply" runat="server" Text="Apply" style="margin-left:20px; width:90px" OnClick="filter_apply_Click" />
-            <asp:Button ID="btn_export_filter" runat="server" Text="Export Copy" style="margin-left:20px; width:90px" OnClick="btn_export_filter_Click" />
-            <asp:Button ID="btn_filter_create" runat="server" Text="Create Filter" style="margin-left:20px; width:90px" OnClick="btn_filter_create_Click" />
-            <asp:Button ID="btn_filter_view" runat="server" Text="View Filter" style="margin-left:20px; width:90px" OnClick="btn_filter_view_Click"/>
+			
+            <asp:Button ID="filter_apply" runat="server" Text="Apply" style="margin-left:20px; width:90px" OnClick="filter_apply_Click" CssClass="btn btn-sm"/>
+            <asp:Button ID="btn_export_filter" runat="server" Text="Export Copy" style="margin-left:20px; width:90px" OnClick="btn_export_filter_Click" CssClass="btn btn-sm"/>
+            <asp:Button ID="btn_filter_create" runat="server" Text="Create Filter" style="margin-left:20px; width:90px" OnClick="btn_filter_create_Click" CssClass="btn btn-sm"/>
+            <asp:Button ID="btn_filter_view" runat="server" Text="View Filter" style="margin-left:20px; width:90px" OnClick="btn_filter_view_Click" CssClass="btn btn-sm"/>
         </asp:Panel>
+		
         <div align="center" class="table_align">
-        <asp:table style="text-align:center" runat="server" ID="table1" GridLines="Both" Font-Names="Segoe UI" Font-Size="Small" Visible="false">
+		
+        <asp:table style="text-align:center" runat="server" ID="table1" GridLines="Both" Font-Names="Segoe UI" Font-Size="Small" Visible="false" CssClass="table-striped">
                 <asp:TableRow runat="server" ID="main_row">
-               
             </asp:TableRow>
         </asp:table>
+		
       </div>
         <asp:Panel runat="server" ID="pnl_filter_view" Visible="false" BorderColor="Black" BorderWidth="2" HorizontalAlign="Center">
             <asp:Label runat="server" ID="lbl_filter_name" Text="Fil_Name"></asp:Label>
@@ -77,9 +118,9 @@
             <br />
             <asp:TextBox ID="txt_filter_col" runat="server" Width="300px"></asp:TextBox> <asp:label runat="server" Text="?" ToolTip="Limited Columns only else it'll throw error" ></asp:label>
             <br />
-            <asp:Button runat="server" ID="btn_filter_save" Text="Save" CssClass="btn_filter_margin" OnClick="btn_filter_save_Click"/>
-            <asp:Button runat="server" ID="btn_filter_delete" Text="Delete" CssClass="btn_filter_margin" OnClick="btn_filter_delete_Click"/>
-            <asp:Button runat="server" ID="btl_filter_cancel" Text="Cancel" CssClass="btn_filter_margin" OnClick="btl_filter_cancel_Click"/>
+            <asp:Button runat="server" ID="btn_filter_save" Text="Save" CssClass="btn_filter_margin btn btn-sm" OnClick="btn_filter_save_Click" />
+            <asp:Button runat="server" ID="btn_filter_delete" Text="Delete" CssClass="btn_filter_margin btn btn-sm" OnClick="btn_filter_delete_Click"/>
+            <asp:Button runat="server" ID="btl_filter_cancel" Text="Cancel" CssClass="btn_filter_margin btn btn-sm" OnClick="btl_filter_cancel_Click"/>
 
         </asp:Panel>
     </form>

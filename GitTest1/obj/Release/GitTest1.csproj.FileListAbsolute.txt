@@ -1,0 +1,6 @@
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\bin\GitTest1.dll.config
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\bin\GitTest1.dll
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\bin\GitTest1.pdb
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\obj\Release\GitTest1.csproj.ResolveComReference.cache
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\obj\Release\GitTest1.dll
+C:\Users\Naresh D.Naresh\Desktop\Naresh\GitTest\GitTest1\obj\Release\GitTest1.pdb
